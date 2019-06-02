@@ -1,0 +1,82 @@
+const Command = require("../../util/Command.js");
+const { RichEmbed } = require("discord.js");
+const { stripIndents } = require("common-tags");
+const moment = require("moment");
+
+const verificationLevels = {
+    0: "None",
+    1: "Low",
+    2: "Medium",
+    3: "(╯°□°）╯︵ ┻━┻",
+    4: "┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻"
+};
+
+const contentFilterLevels = {
+    0: "None",
+    1: "Medium",
+    2: "High"
+};
+
+class ServerInfo extends Command {
+    constructor(client) {
+      super(client, {
+        name: "serverinfo",
+        description: "Displays information about the current server.",
+        category: "Information",
+        usage: "serverinfo",
+        aliases: ["sinfo", "server", "guildinfo", "guild"],
+        guildOnly: true
+      });
+    }
+
+    async run(message, args, level) { 
+        try {
+            const createdTimestamp = moment.utc(message.guild.createdAt).format("YYYYMMDD");
+            const embed = new RichEmbed()
+            .setColor(0x00FFFF)
+            .setThumbnail(message.guild.iconURL)
+            .setTitle(`Server Information for ${message.guild.name}`)
+            .setDescription(`**Server ID:** ${message.guild.id}`)
+
+            .addField("❯ Details", stripIndents`
+            • Created: **${moment.utc(message.guild.createdAt).format("dddd, Do MMMM YYYY @ HH:mm:ss")}** (${moment(createdTimestamp, "YYYYMMDD").fromNow()})
+            • Owner: **${message.guild.owner.user.tag}**
+            • Region: **${message.guild.region.toProperCase()}**
+            • Verification: **${verificationLevels[message.guild.verificationLevel]}**
+
+            `, true)
+
+            .addField("❯ Users", stripIndents`
+            • Users: **${message.guild.memberCount - message.guild.members.filter(m => m.user.bot).size}**
+            • Bots: **${message.guild.members.filter(m => m.user.bot).size}**
+
+            `, true)
+
+            .addField("❯ Roles", stripIndents`
+            • Default: **${message.guild.defaultRole.name}**
+            • Count: **${message.guild.roles.size} roles**
+            `, true)
+
+            .addField("❯ Channels", stripIndents`
+            • Text: **${message.guild.channels.filter(ch => ch.type === "text").size}**
+            • Voice: **${message.guild.channels.filter(ch => ch.type === "voice").size}**
+            • AFK: **${message.guild.afkChannel ? message.guild.afkChannel.name : "None"}**
+            `, true)
+
+            .addField("❯ Other", stripIndents`
+            • AFK: After **${message.guild.afkTimeout / 60} min**
+            • Large? **${message.guild.large.toString().toProperCase()}**
+            • Content filter level: **${contentFilterLevels[message.guild.explicitContentFilter]}**
+                    
+            `, true)
+
+            .setFooter(`Info requested by ${message.author.tag} • All times are UTC`, message.author.displayAvatarURL);
+            message.channel.send({embed});
+        } catch(err) {
+            this.client.logger.error(err);
+            return this.client.embed("", message);
+        }
+    }
+}
+
+module.exports = ServerInfo;
