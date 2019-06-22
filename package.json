@@ -1,7 +1,7 @@
 {
   "name": "Amaterasu",
   "version": "2.1.0",
-  "description": "I'm a bot developed and maintained by OwO#8169.\n\n**About the name:**\nAmaterasu-Ō-Mi-Kami (天照大神 or 天照大御神) Commonly called Amaterasu, she is the goddess of the sun as well as the purported ancestress of the Imperial Household of Japan. Her full name means \"Great Goddess\" or \"Great Spirit Who Shines in the Heavens\"; she may also be referred to as Ōhiru-menomuchi-no-kami (大日孁貴神). For many reasons, one among them being her ties to the Imperial family, she is often considered (though not officially) to be the \"primary god\" of Shinto.\n\n",
+  "description": "I'm a bot developed and maintained by Latina#8169.\n\n**About the name:**\nAmaterasu-Ō-Mi-Kami (天照大神 or 天照大御神) Commonly called Amaterasu, she is the goddess of the sun as well as the purported ancestress of the Imperial Household of Japan. Her full name means \"Great Goddess\" or \"Great Spirit Who Shines in the Heavens\"; she may also be referred to as Ōhiru-menomuchi-no-kami (大日孁貴神). For many reasons, one among them being her ties to the Imperial family, she is often considered (though not officially) to be the \"primary god\" of Shinto.\n\n",
   "main": "index.js",
   "dependencies": {
     "@k3rn31p4nic/google-translate-api": "^1.0.5",
