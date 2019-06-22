@@ -9,7 +9,7 @@
 Amaterasu is a powerful, configurable and multipurpose Discord bot, made using the Discord.js library for the Discord API. 
 Please ensure you read the section regarding self-hosting and portability in this README document.
 
-Made by [Amaterasu-Ookami](https://github.com/Amaterasu-Oomikami).  
+Made by [Pojitibu](https://github.com/Pojitibu).  
 
 ## Commands
 A variety of commands can be found in Amaterasu, ranging from system functions to fun commands. Amaterasu currently has over 100 commands, with many more planned for future releases.
