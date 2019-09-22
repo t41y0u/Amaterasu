@@ -59,7 +59,6 @@ const handleVideo = async (video, message, voiceChannel, playlist = false, seek 
 function play(guild, song) {
     const queue = guild.client.playlists;
     const serverQueue = queue.get(guild.id);
-    console.log(queue.get(guild.id).songs);
     if (!song) {
         queue.get(guild.id).voiceChannel.leave();
         const embed = new RichEmbed()
@@ -71,13 +70,11 @@ function play(guild, song) {
         guild.client.user.setActivity(`with the sun • a!help`);
         return;
     }
-    console.log(queue.get(guild.id).songs);
     const dispatcher = queue.get(guild.id).connection.playStream(ytdl(song.url, { quality: "highest", filter: "audioonly" }), { seek: 0, volume: queue.get(guild.id).volume || 1 })
     .on("end", () => {
         if (!queue.get(guild.id).loop) queue.get(guild.id).songs.shift();
         setTimeout(() => { play(guild, queue.get(guild.id).songs[0]) }, 250);
     });
-    console.log(queue.get(guild.id).songs);
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 100);   
     const songdurh = String(song.durationh).padStart(2, "0");
     const songdurm = String(song.durationm).padStart(2, "0");
