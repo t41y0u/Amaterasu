@@ -1,13 +1,13 @@
 const Command = require("../../util/Command.js");
 const { RichEmbed } = require("discord.js");
 
-class Hug extends Command {
+class Kiss extends Command {
     constructor (client) {
         super(client, {
-            name: "hug",
-            description: "Hug an user or get hugged!",
+            name: "kiss",
+            description: "Kiss an user or get kissed!",
             category: "Weeb",
-            usage: "hug [user]",
+            usage: "kiss [user]",
             guildOnly: true,
             aliases: ["none"]
         });
@@ -17,29 +17,29 @@ class Hug extends Command {
         try {
             let member = message.mentions.members.first();
             if (member) {
-                await this.client.nekoslife.sfw.hug().then(json => {
+                await this.client.nekoslife.sfw.kiss().then(json => {
                     if (member === message.author) {
                         let embed = new RichEmbed()
                             .setColor(0x00FFFF)
-                            .setTitle(`Oh, you are hugging yourself? Well, let me hug you instead!`)
+                            .setTitle(`Oh, you are kissing yourself? Well, let me kiss you instead!`)
                             .setImage(json.url);
                         return message.channel.send({embed});
                     } else if (member === this.client.user) {
                         let embed = new RichEmbed()
                             .setColor(0x00FFFF)
-                            .setTitle(`Oh, you are hugging me? I'm not that warm! 😳`)
+                            .setTitle(`Oh, you are kissing me? My lips are cold! 😳`)
                         return message.channel.send({embed});
                     }
                     let embed = new RichEmbed()
                         .setColor(0x00FFFF)
-                        .setTitle(`${message.author.tag} hugged ${member.user.tag}!`)
+                        .setTitle(`${message.author.tag} kissed ${member.user.tag}!`)
                         .setImage(json.url);
                     message.channel.send({embed});
                 });
             } else {
                 let embed = new RichEmbed()
                     .setColor(0x00FFFF)
-                    .setTitle(`${message.author.tag} got hugged!`)
+                    .setTitle(`${message.author.tag} got kissed!`)
                     .setImage(json.url);
                 message.channel.send({embed});
             }
@@ -50,4 +50,4 @@ class Hug extends Command {
     }
 }
 
-module.exports = Hug;
+module.exports = Kiss;

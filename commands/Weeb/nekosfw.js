@@ -1,13 +1,13 @@
 const Command = require("../../util/Command.js");
 const { RichEmbed } = require("discord.js");
 
-class Neko extends Command {
+class NekoSFW extends Command {
     constructor (client) {
         super(client, {
-            name: "neko",
-            description: "Returns a cute neko. Nyann ~",
+            name: "nekosfw",
+            description: "Returns a cute sfw neko. Nyann ~",
             category: "Weeb",
-            usage: "neko",
+            usage: "nekosfw",
             guildOnly: true
         });
     }
@@ -27,4 +27,4 @@ class Neko extends Command {
     }
 }
 
-module.exports = Neko;
+module.exports = NekoSFW;
