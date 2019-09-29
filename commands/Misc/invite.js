@@ -16,7 +16,7 @@ class Invite extends Command {
         try {
             message.channel.send("Generating...")
             .then(msg => {
-                const embed = new RichEmbed().setColor(0x00FFFF).setTitle("Invite Link").setDescription("[Click here](https://discordapp.com/oauth2/authorize?&client_id=562602972777807872&scope=bot&permissions=66186303)");
+                const embed = new RichEmbed().setColor(0x00FFFF).setTitle("Invite Link").setDescription("[Click here](https://discordapp.com/oauth2/authorize?&client_id=562602972777807872&scope=bot&permissions=1547086070)");
                 msg.edit({embed});
             });
         } catch(err) {

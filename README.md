@@ -2,7 +2,7 @@
 
 # Amaterasu
 [![Build Status](https://travis-ci.org/Amaterasu-Oomikami/Amaterasu.svg?branch=master)](https://travis-ci.org/Amaterasu-Oomikami/Amaterasu)
-[![Invite Amaterasu](https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?style=flat-square&logo=discord)](https://discordapp.com/oauth2/authorize?&client_id=562602972777807872&scope=bot&permissions=66186303)
+[![Invite Amaterasu](https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?style=flat-square&logo=discord)](https://discordapp.com/oauth2/authorize?&client_id=562602972777807872&scope=bot&permissions=1547086070)
 [![Library](https://img.shields.io/badge/library-discord.js-blue.svg?style=flat-square)](https://discord.js.org/#/)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
