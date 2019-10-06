@@ -43,10 +43,7 @@ class Mute extends Command {
         if (user.id === process.env.OWNER) return message.channel.send("I cannot mute my master.");
         if (message.guild.member(message.author).highestRole.position <= message.guild.member(user).highestRole.position) return message.channel.send("You cannot mute this user as they have a higher role than you.");
         if (!empty) {
-            if (message.guild.member(user).roles.has(muteRole.id)) {
-                return message.channel.send("The mentioned user is already muted.");
-            }
-
+            if (message.guild.member(user).roles.has(muteRole.id)) return message.channel.send("The mentioned user is already muted.");
             if (!reason) {
                 message.channel.send("Please enter a reason for the mute...\nThis text-entry period will time-out in 60 seconds. Reply with `cancel` to exit.");
                 await message.channel.awaitMessages(m => m.author.id === message.author.id, {
