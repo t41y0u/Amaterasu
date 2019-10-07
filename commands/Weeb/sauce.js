@@ -2,13 +2,13 @@ const Command = require("../../util/Command.js");
 const { RichEmbed } = require("discord.js");
 const checkImage = require("is-image-url");
 const Sagiri = require("sagiri");
-const saucenao = new Sagiri(process.env.SAUCENAO_TOKEN, {"getRating": true });
+const saucenao = new Sagiri(process.env.SAUCENAO_TOKEN, { "getRating": true });
 
 class Sauce extends Command {
     constructor (client) {
         super(client, {
             name: "sauce",
-            description: "Get the cource of an image from its URL.",
+            description: "Get the source of an image from its URL.",
             category: "Weeb",
             usage: "sauce <image url>",
             guildOnly: true,
