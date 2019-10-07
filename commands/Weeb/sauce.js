@@ -46,7 +46,9 @@ class Sauce extends Command {
                     if (reaction.emoji.name === "⬅") idx++;
                     else if (reaction.emoji.name === "➡") idx--;
                 } else {
-                    embed.setTitle(results[idx].original.data.title || `Image from ${results[idx].site}`)
+                    embed = new RichEmbed()
+                        .setColor(0x00FFFF)
+                        .setTitle(results[idx].original.data.title || `Image from ${results[idx].site}`)
                         .setURL(results[idx].url)
                         .setThumbnail(encodeURI(results[idx].thumbnail))
                         .addField("Similarity", `${results[idx].similarity.toString()}%`)
