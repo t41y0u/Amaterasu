@@ -46,7 +46,7 @@
     "path": "^0.12.7",
     "plotly": "^1.0.6",
     "request": "^2.88.0",
-    "sagiri": "^1.5.3",
+    "sagiri": "^1.5.4",
     "saucenao": "0.0.2",
     "sequelize": "^5.19.0",
     "simple-youtube-api": "^5.1.1",
