@@ -44,6 +44,7 @@ class Trivia extends Command {
             };
             const collector = msg.createReactionCollector((reaction, user) => user !== this.client.user, { time: 30000 })
             collector.on('collect', async (reaction) => {
+                if (!ongoing) return await reaction.remove(reaction.users.filter(user => user !== this.client.user).first());
                 let response = null;
                 if (reaction.emoji.name === "🇦") response = "A";
                 else if (reaction.emoji.name === "🇧") response = "B";
