@@ -2,7 +2,7 @@ const Command = require("../../util/Command.js");
 const { RichEmbed } = require("discord.js");
 const checkImage = require("is-image-url");
 const Sagiri = require("sagiri");
-const saucenao = new Sagiri(process.env.SAUCENAO_TOKEN, { "getRating": true });
+const saucenao = new Sagiri(process.env.SAUCENAO_TOKEN);
 
 class Sauce extends Command {
     constructor (client) {
@@ -32,34 +32,25 @@ class Sauce extends Command {
             let idx = 0, author = message.author;
             embed.setTitle(results[idx].original.data.title || `Image from ${results[idx].site}`)
                  .setURL(results[idx].url)
-                 .setThumbnail(results[idx].thumbnail)
+                 .setThumbnail(encodeURI(results[idx].thumbnail))
                  .addField("Similarity", `${results[idx].similarity.toString()}%`)
-                 .addField("Artist", results[idx].original.data.creator || `${results[idx].original.data.member_name} (${results[idx].original.data.member_id})`)
+                 .addField("Artist", results[idx].original.data.creator ? results[idx].original.data.creator : (results[idx].original.data.member_name ? `${results[idx].original.data.member_name} (${results[idx].original.data.member_id})` : "Unknown"))
             const msg = await message.channel.send({embed});
             msg.react("⬅").then(() => msg.react("🗑")).then(() => msg.react("➡"));
             const collector = msg.createReactionCollector((reaction, user) => ["⬅", "🗑", "➡"].includes(reaction.emoji.name) && user === author);
             collector.on('collect', async (reaction) => {
-                if (reaction.emoji.name === "⬅") {
-                    idx--;
-                } else if (reaction.emoji.name === "▶") {
-                    return msg.delete();
-                } else if (reaction.emoji.name === "➡") {
-                    idx++;
-                }
+                if (reaction.emoji.name === "⬅") idx--;
+                else if (reaction.emoji.name === "🗑") return msg.delete();
+                else if (reaction.emoji.name === "➡") idx++;
                 if (idx < 0 || idx > results.length - 1) {
-                    if (reaction.emoji.name === "⬅") {
-                        idx++;
-                    } else if (reaction.emoji.name === "➡") {
-                        idx--;
-                    }
+                    if (reaction.emoji.name === "⬅") idx++;
+                    else if (reaction.emoji.name === "➡") idx--;
                 } else {
-                    embed = new RichEmbed()
-                        .setColor(0x00FFFF)
-                        .setTitle(results[idx].original.data.title || `Image from ${results[idx].site}`)
+                    embed.setTitle(results[idx].original.data.title || `Image from ${results[idx].site}`)
                         .setURL(results[idx].url)
-                        .setThumbnail(results[idx].thumbnail)
+                        .setThumbnail(encodeURI(results[idx].thumbnail))
                         .addField("Similarity", `${results[idx].similarity.toString()}%`)
-                        .addField("Artist", results[idx].original.data.creator || `${results[idx].original.data.member_name} (${results[idx].original.data.member_id})`)
+                        .addField("Artist", results[idx].original.data.creator ? results[idx].original.data.creator : (results[idx].original.data.member_name ? `${results[idx].original.data.member_name} (${results[idx].original.data.member_id})` : "Unknown"))
                     msg.edit({embed});
                 }
                 await reaction.remove(reaction.users.filter(user => user !== this.client.user).first());
