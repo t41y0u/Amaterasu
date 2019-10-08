@@ -91,8 +91,8 @@ class Trivia extends Command {
             }
             if (!levels.includes(difficulty)) return this.client.embed("commonError", message, "Invalid difficulty specified. Please choose from one of **easy**, **medium** or **hard**.");
             if (!categories.includes(category)) return this.client.embed("commonError", message, `Invalid category specified. Please choose from one of **${categories.join("**, **")}**.`);
-            const { body } = await snekfetch.get(`https://opentdb.com/api.php?amount=10&difficulty=${difficulty}&category=${categoryChoices[category]}&type=multiple`);
-            const quiz = body.results.random();
+            const { body } = await snekfetch.get(`https://opentdb.com/api.php?amount=1&difficulty=${difficulty}&category=${categoryChoices[category]}&type=multiple`);
+            const quiz = body.results[0];
             const choices = quiz.incorrect_answers.map(ans => h.decode(ans));
             choices.push(h.decode(quiz.correct_answer));
             console.log(h.decode(quiz.correct_answer));
