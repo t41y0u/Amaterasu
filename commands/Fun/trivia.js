@@ -40,9 +40,9 @@ class Trivia extends Command {
             const msg = await message.channel.send({embed}); let ongoing = "yes";
             msg.react("🇦").then(() => msg.react("🇧")).then(() => msg.react("🇨")).then(() => msg.react("🇩")).then(() => msg.react("⏩"))
             const filter = (reaction, user) => {
-                return ["🇦", "🇧", "🇨", "🇩", "⏩"].includes(reaction.emoji.name) && user.id === message.author.id;
+                return ["🇦", "🇧", "🇨", "🇩", "⏩"].includes(reaction.emoji.name) && user === message.author && user !== this.client.user;
             };
-            const collector = msg.createReactionCollector((reaction, user) => user !== this.client.user, { time: 30000 })
+            const collector = msg.createReactionCollector(filter, { time: 30000 })
             collector.on('collect', async (reaction) => {
                 if (!ongoing) return await reaction.remove(reaction.users.filter(user => user !== this.client.user).first());
                 let response = null;
